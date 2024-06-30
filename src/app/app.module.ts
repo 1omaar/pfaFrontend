@@ -9,6 +9,8 @@ import {FormsModule} from "@angular/forms";
 import { NavComponent } from './nav/nav.component';
 import { AjouterProductComponent } from './ajouter-product/ajouter-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+.bg-main{
+  background-color: #2a9d8e;
+}
+.btn-custom {
+  --bs-btn-color: #fff !important;
+  --bs-btn-bg: #2a9d8e !important;
+  --bs-btn-border-color: #2a9d8e !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-hover-bg: #247f73 !important;
+  --bs-btn-hover-border-color: #206f66 !important;
+  --bs-btn-focus-shadow-rgb: 42, 157, 142 !important;
+  --bs-btn-active-color: #fff !important;
+  --bs-btn-active-bg: #206f66 !important;
+  --bs-btn-active-border-color: #1b5f5a !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+  --bs-btn-disabled-color: #fff !important;
+  --bs-btn-disabled-bg: #2a9d8e !important;
+  --bs-btn-disabled-border-color: #2a9d8e !important;
+}
+.main-color{
+  color: #1b5f5a;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

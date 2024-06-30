@@ -1,9 +1,13 @@
-<app-nav></app-nav>
+
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Product List</h2>
+  <div class="custom-div mb-4">
+    <h2 class="text-center  ">Nos produits</h2>
+  </div>
 
-  <input [(ngModel)]="searchQuery" (input)="searchProducts()" type="text" class="form-control mb-4" placeholder="Search products">
+
+
+  <input [(ngModel)]="searchQuery" (input)="searchProducts()" type="text" class="form-control mb-4" placeholder="Recherche Produit">
 
 
 
@@ -12,24 +16,23 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
+        <th>Nom</th>
         <th>Description</th>
-        <th>Price</th>
-        <th>Quantite</th>
-        <th>Actions</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td>{{ product.id }}</td>
         <td>{{ product.nom }}</td>
         <td>{{ product.description }}</td>
-        <td>{{ product.prix | currency }}</td>
+        <td>{{ product.prix  }} TND</td>
         <td>{{ product.quantite }}</td>
         <td>
-          <button [routerLink]="['/update', product.id]" class="btn btn-warning btn-sm">Update</button>
-          <button (click)="deleteProduct(product.id)" class="btn btn-danger btn-sm">Delete</button>
+          <button [routerLink]="['/update', product.id]" class="btn btn-outline-warning btn-sm"><mat-icon>edit</mat-icon></button>
+          <button (click)="deleteProduct(product.id)" class="btn btn-outline-danger btn-sm"><mat-icon>delete</mat-icon></button>
+
         </td>
       </tr>
     </tbody>
