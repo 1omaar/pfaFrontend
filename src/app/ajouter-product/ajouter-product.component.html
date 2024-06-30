@@ -1,24 +1,35 @@
-
 <app-nav></app-nav>
-      <div class="container">
-        <form (ngSubmit)="addProduct(productName.value, productDescription.value, productPrice.valueAsNumber , productQuantite.valueAsNumber)">
-          <div class="mb-3">
-            <label for="productName" class="form-label">Name</label>
-            <input #productName type="text" class="form-control" id="productName" required>
-          </div>
-          <div class="mb-3">
-            <label for="productDescription" class="form-label">Description</label>
-            <input #productDescription type="text" class="form-control" id="productDescription" required>
-          </div>
-          <div class="mb-3">
-            <label for="productPrice" class="form-label">Price</label>
-            <input #productPrice type="number" class="form-control" id="productPrice" required>
-          </div>
-          <div class="mb-3">
-            <label for="productQuantite" class="form-label">Quantité</label>
-            <input #productQuantite type="number" class="form-control" id="productQuantite" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </form>
+<div class="container">
+  <form #addProductForm="ngForm" (ngSubmit)="addProduct(addProductForm)">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Name</label>
+      <input #productName="ngModel" ngModel name="productName" type="text" class="form-control" id="productName" required>
+      <div *ngIf="productName.invalid && productName.touched" class="text-danger">
+        Product name is required.
       </div>
-
+    </div>
+    <div class="mb-3">
+      <label for="productDescription" class="form-label">Description</label>
+      <textarea #productDescription="ngModel" ngModel name="productDescription" class="form-control" id="productDescription" rows="3" required></textarea>
+      <div *ngIf="productDescription.invalid && productDescription.touched" class="text-danger">
+        Product description is required.
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="productPrice" class="form-label">Price</label>
+      <input #productPrice="ngModel" ngModel name="productPrice" type="number" class="form-control" id="productPrice" required>
+      <div *ngIf="productPrice.invalid && productPrice.touched" class="text-danger">
+        Product price is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="productQuantite" class="form-label">Quantité</label>
+      <input #productQuantite="ngModel" ngModel name="productQuantite" type="number" class="form-control" id="productQuantite" required>
+      <div *ngIf="productQuantite.invalid && productQuantite.touched" class="text-danger">
+        Product quantity is required.
+      </div>
+    </div>
+    <button type="submit" data-bs-dismiss="modal" class="btn btn-primary" [disabled]="addProductForm.invalid">Save changes</button>
+  </form>
+</div>

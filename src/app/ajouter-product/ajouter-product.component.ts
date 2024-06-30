@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../product.service";
-import {Product} from "../Models/product.model";
+import { ProductService } from "../product.service";
+import { Product } from "../Models/product.model";
 import Swal from "sweetalert2";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-ajouter-product',
@@ -12,13 +13,14 @@ import {Router} from "@angular/router";
 export class AjouterProductComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productService: ProductService ,  private router: Router) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  addProduct(name: string, description: string, price: number, quantite: number): void {
-    const newProduct = new Product(name, description, price, quantite);
+  addProduct(form: NgForm): void {
+    const { productName, productDescription, productPrice, productQuantite } = form.value;
+    const newProduct = new Product(productName, productDescription, productPrice, productQuantite);
 
     this.productService.createProduct(newProduct).subscribe((product: Product) => {
       this.products.push(product);
@@ -28,6 +30,4 @@ export class AjouterProductComponent implements OnInit {
       });
     });
   }
-
-
 }
