@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../Models/product.model';
 import { ProductService } from '../product.service';
 import Swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
@@ -11,6 +12,7 @@ import Swal from 'sweetalert2';
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
+  searchQuery: string = '';
 
   constructor(private productService: ProductService) { }
 
@@ -24,13 +26,13 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-    addProduct(name: string, description: string, price: number , quantite:number): void {
-
-    console.log(quantite)
-    const newProduct = new Product(name, description, price , quantite);
+  addProduct(form: NgForm): void {
+    const { productName, productDescription, productPrice, productQuantite } = form.value;
+    const newProduct = new Product(productName, productDescription, productPrice, productQuantite);
     this.productService.createProduct(newProduct).subscribe((product: Product) => {
       this.products.push(product);
       Swal.fire('Success', 'Product added successfully', 'success');
+      form.reset(); // Reset the form
     });
   }
 
@@ -62,5 +64,14 @@ export class ProductListComponent implements OnInit {
         });
       }
     });
+  }
+  searchProducts(): void {
+    if (this.searchQuery.trim()) {
+      this.productService.searchProducts(this.searchQuery.trim()).subscribe((products: Product[]) => {
+        this.products = products;
+      });
+    } else {
+      this.getProducts(); // If search query is empty, load all products
+    }
   }
 }
