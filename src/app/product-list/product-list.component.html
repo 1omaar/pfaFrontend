@@ -3,6 +3,8 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Product List</h2>
 
+  <input [(ngModel)]="searchQuery" (input)="searchProducts()" type="text" class="form-control mb-4" placeholder="Search products">
+
   <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addProductModal">
     Add Product
   </button>

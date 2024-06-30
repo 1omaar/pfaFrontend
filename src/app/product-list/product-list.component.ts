@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
+  searchQuery: string = '';
 
   constructor(private productService: ProductService) { }
 
@@ -63,5 +64,14 @@ export class ProductListComponent implements OnInit {
         });
       }
     });
+  }
+  searchProducts(): void {
+    if (this.searchQuery.trim()) {
+      this.productService.searchProducts(this.searchQuery.trim()).subscribe((products: Product[]) => {
+        this.products = products;
+      });
+    } else {
+      this.getProducts(); // If search query is empty, load all products
+    }
   }
 }
