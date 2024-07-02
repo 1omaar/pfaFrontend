@@ -3,25 +3,40 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import {AjouterProductComponent} from "./ajouter-product/ajouter-product.component";
 import {UpdateProductComponent} from "./update-product/update-product.component";
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/produit', // Redirect to dashboard by default
+    redirectTo: '/produit', 
+    pathMatch: 'full'
+  },
+  {
+    path: 'register',
+    redirectTo: '/Register', 
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    redirectTo: '/login', 
     pathMatch: 'full'
   },
   {
     path: 'produit',
-    component: ProductListComponent,
+    component: ProductListComponent ,canActivate: [AuthGuard],
 
   },
   {
     path: 'AjouterProduct',
-    component: AjouterProductComponent,
+    component: AjouterProductComponent  ,canActivate: [AuthGuard],
 
   },
-  { path: 'update/:id', component: UpdateProductComponent }, // Replace with your update component
+  { path: 'update/:id', component: UpdateProductComponent  ,canActivate: [AuthGuard]}, // Replace with your update component
+  { path: 'Register', component: RegisterComponent }, // Replace with your update component
+  { path: 'login', component: LoginComponent }, // Replace with your update component
 
 ];
 

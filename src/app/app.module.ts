@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductListComponent } from './product-list/product-list.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NavComponent } from './nav/nav.component';
 import { AjouterProductComponent } from './ajouter-product/ajouter-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {MatIconModule} from "@angular/material/icon";
     ProductListComponent,
     NavComponent,
     AjouterProductComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,8 @@ import {MatIconModule} from "@angular/material/icon";
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
