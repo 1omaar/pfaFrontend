@@ -1,3 +1,7 @@
 .hover-class:hover{
 opacity: 50%;
 }
+.nav-link.hover-class {
+    cursor: pointer;
+  }
+  

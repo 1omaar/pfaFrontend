@@ -1,9 +1,9 @@
-// update-product.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../product.service'; // Import your service
-import { Product } from '../Models/product.model'; // Import your product model
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import { ProductService } from '../product.service';
+import { Product } from '../Models/product.model';
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-product',
@@ -17,8 +17,8 @@ export class UpdateProductComponent implements OnInit {
   constructor(
     private activateRouter: ActivatedRoute,
     private productService: ProductService,
+    private toastr: ToastrService, // Inject ToastrService
     private router: Router
-
   ) {}
 
   ngOnInit(): void {
@@ -34,14 +34,11 @@ export class UpdateProductComponent implements OnInit {
 
   onSubmit(): void {
     this.productService.updateProduct(this.idSnapshot, this.product).subscribe(() => {
-      Swal.fire({
-        title: 'Success',
-        text: 'Product updated successfully',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        this.router.navigate(['/']); // Replace '/' with your product list route
-      });
+      this.toastr.success('Produit mis à jour avec succès', 'Succès'); // Display success toast in French
+      this.router.navigate(['/']); // Navigate to the product list route
+    }, error => {
+      this.toastr.error('Une erreur s\'est produite lors de la mise à jour du produit', 'Erreur');
+
     });
   }
 }
