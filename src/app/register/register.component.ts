@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtService } from '../Service/jwt.service';
-import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm!: FormGroup ;
+  registerForm!: FormGroup;
 
   constructor(
     private service: JwtService,
     private fb: FormBuilder,
+    private toastr: ToastrService, // Inject ToastrService
     private router: Router
   ) { }
 
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-    }, { validator: this.passwordMatchValidator })
+    }, { validator: this.passwordMatchValidator });
   }
 
   passwordMatchValidator(formGroup: FormGroup) {
@@ -43,23 +44,12 @@ export class RegisterComponent implements OnInit {
       this.service.register(this.registerForm.value).subscribe(
         (response) => {
           if (response.id != null) {
-            Swal.fire({
-              title: 'Registration Successful',
-              text: `Hello ${response.name}, you have registered successfully!`,
-              icon: 'success',
-              confirmButtonText: 'OK'
-            }).then(() => {
-              this.router.navigate(['/login']);
-            });
+            this.toastr.success(`Hello ${response.name}, you have registered successfully!`, 'Registration Successful');
+            this.router.navigate(['/login']);
           }
         },
         (error) => {
-          Swal.fire({
-            title: 'Registration Failed',
-            text: error.error, // Display the error message from the backend
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
+          this.toastr.error(error.error, 'Registration Failed');
         }
       );
     }

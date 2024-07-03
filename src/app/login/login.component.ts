@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtService } from '../Service/jwt.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { AuthService } from '../Service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(
+    private toastrService: ToastrService,
     private service: JwtService,
     private fb: FormBuilder,
     private router: Router,
@@ -34,26 +35,20 @@ export class LoginComponent implements OnInit {
       this.service.login(this.loginForm.value).subscribe(
         (response) => {
           if (response.jwt != null) {
-            Swal.fire({
-              title: 'Login Successful',
-              text: `Welcome, ${response.name}, to your dashboard`,
-              icon: 'success',
-              confirmButtonText: 'OK'
-            }).then(() => {
-              this.authService.login(response.jwt);
-              this.router.navigateByUrl("/");
-            });
+            this.authService.login(response.jwt);
+            this.toastrService.success('Connexion réussie!', 'Succès');
+            this.router.navigateByUrl("/");
+          } else {
+            this.toastrService.error('Identifiants invalides.', 'Erreur');
           }
         },
         (error) => {
-          Swal.fire({
-            title: 'Login Failed',
-            text: error.error ? error.error : 'An error occurred during login.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
+          console.error(error);
+          this.toastrService.error('Échec de la connexion. Veuillez réessayer.', 'Erreur');
         }
       );
+    } else {
+      this.toastrService.warning('Veuillez remplir correctement le formulaire.', 'Avertissement');
     }
   }
 }

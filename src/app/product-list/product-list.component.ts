@@ -3,6 +3,7 @@ import { Product } from '../Models/product.model';
 import { ProductService } from '../product.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +15,8 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   searchQuery: string = '';
 
-  constructor(private productService: ProductService) { }
+  constructor(     private toastr: ToastrService, // Inject ToastrService
+  private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -47,24 +49,25 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  deleteProduct(id: number|undefined): void {
+  deleteProduct(id: number | undefined): void {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      title: 'Êtes-vous sûr(e) ?',
+      text: 'Vous ne pourrez pas revenir en arrière !',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-le !'
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.deleteProduct(id).subscribe(() => {
           this.products = this.products.filter(p => p.id !== id);
-          Swal.fire('Deleted!', 'Product has been deleted.', 'success');
+          Swal.fire('Supprimé !', 'Le produit a été supprimé.', 'success');
         });
       }
     });
   }
+  
   searchProducts(): void {
     if (this.searchQuery.trim()) {
       this.productService.searchProducts(this.searchQuery.trim()).subscribe((products: Product[]) => {

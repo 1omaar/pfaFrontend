@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,12 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
