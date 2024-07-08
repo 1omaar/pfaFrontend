@@ -1,0 +1,20 @@
+/* footer.component.css */
+.bg-main {
+    background-color:#2a9d8e; /* Adjust as needed */
+  }
+  
+  .text-white {
+    color: #fff;
+  }
+  
+  .py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
