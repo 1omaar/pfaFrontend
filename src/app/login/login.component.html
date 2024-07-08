@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login</title> 
+     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
   </head>
   <body>
@@ -14,14 +14,14 @@
         <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
             <div class="row">
             <i class="fas fa-user"></i>
-            <input type="email" class="form-control" id="email"  placeholder="Email or Phone" formControlName="email" />
+            <input type="email" class="form-control" id="email"  placeholder="Adresse Mail" formControlName="email" />
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" class="form-control"  placeholder="Password" id="password" formControlName="password" />
+            <input type="password" class="form-control"  placeholder="Mot de passe" id="password" formControlName="password" />
           </div>
           <div class="row button">
-            <button type="submit" class="btn btn-primary " style="background-color: #2a9d8e;" [disabled]="loginForm.invalid">Login</button>
+            <button type="submit" class="btn btn-primary " style="background-color: #2a9d8e;" [disabled]="loginForm.invalid">Se connecter</button>
         </div>
         <div class="signup-link">Pas encore membre ? <a routerLink="/Register">Inscrivez-vous maintenant</a></div>
     </form>
